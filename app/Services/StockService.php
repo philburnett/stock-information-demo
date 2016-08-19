@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Repositories\CompanyRepository;
+
 /**
  * Class StockService
  *
@@ -9,14 +11,6 @@ namespace App\Services;
  */
 class StockService
 {
-    /**
-     *
-     */
-    public function getAll()
-    {
-
-    }
-
     /**
      * @param $stockId
      */

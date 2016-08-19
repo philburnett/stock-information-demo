@@ -16,11 +16,11 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get(
-    '/stocks',
-    ['as' => 'stock-list', 'uses' => 'StockController@getList']
+    '/companies',
+    ['as' => 'companies', 'uses' => 'CompanyController@getList']
 );
 
 $app->get(
     '/stocks/{stockId}',
-    ['as' => 'stock-list', 'uses' => 'StockController@getInfo']
+    ['as' => 'stock-info', 'uses' => 'StockController@getInfo']
 );

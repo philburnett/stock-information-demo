@@ -24,12 +24,6 @@ class StockController extends Controller
         $this->stockService = $stockService;
     }
 
-    public function getList()
-    {
-        dd('getList');
-        exit;
-    }
-
     public function getInfo()
     {
         dd('getInfo');
