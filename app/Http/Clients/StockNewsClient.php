@@ -5,7 +5,6 @@ namespace App\Http\Clients;
 use App\Exceptions\StockNewsNotAvailableException;
 use Exception;
 use GuzzleHttp\Client;
-use Psr\Http\Message\StreamInterface;
 
 /**
  * Class StockNewsClient
@@ -30,7 +29,7 @@ class StockNewsClient
     /**
      * @param $storyFeedUri
      *
-     * @return StreamInterface
+     * @return array
      * @throws StockNewsNotAvailableException
      */
     public function getNews($storyFeedUri)

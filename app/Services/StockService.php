@@ -28,7 +28,8 @@ class StockService
     /**
      * StockService constructor.
      *
-     * @param StockClient $stockClient
+     * @param StockClient     $stockClient
+     * @param StockNewsClient $stockStoryClient
      */
     public function __construct(StockClient $stockClient, StockNewsClient $stockStoryClient)
     {

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\CompanyNotFoundException;
+use App\Exceptions\StockInformationNotAvailableException;
 use App\Services\CompanyService;
 use App\Services\StockService;
+use Exception;
 
 /**
  * Class StockController
