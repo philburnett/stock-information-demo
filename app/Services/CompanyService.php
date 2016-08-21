@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Domain\StockTicker;
 use App\Repositories\CompanyRepository;
 
 /**
@@ -27,5 +28,16 @@ class CompanyService
     public function getAll()
     {
         return $this->companyRepository->getAll();
+    }
+
+    /**
+     * @param $tickerCode
+     *
+     * @return StockTicker
+     */
+    public function getCompanyStockTicker($tickerCode)
+    {
+        $companyInfo = $this->companyRepository->getCompanyInformation($tickerCode);
+        return new StockTicker($companyInfo['name'], $companyInfo['tickerCode']);
     }
 }

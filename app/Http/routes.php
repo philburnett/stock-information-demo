@@ -21,6 +21,6 @@ $app->get(
 );
 
 $app->get(
-    '/stocks/{stockId}',
+    '/stocks/{tickerCode}',
     ['as' => 'stock-info', 'uses' => 'StockController@getInfo']
 );

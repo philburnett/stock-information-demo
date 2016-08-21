@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\CompanyNotFoundException;
 use MongoClient;
 
 /**
@@ -38,6 +39,18 @@ class CompanyRepository
         }
 
         return $companies;
+    }
+
+    public function getCompanyInformation($tickerCode)
+    {
+        $cursor = $this->collection->find(['tickerCode' => $tickerCode]);
+        if ($cursor->count() == 0) {
+            throw new CompanyNotFoundException();
+        }
+        foreach ($cursor as $doc) {
+            // return first result (assuming uniqueness)
+            return $doc;
+        }
     }
 }
 

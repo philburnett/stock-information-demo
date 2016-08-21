@@ -5,15 +5,15 @@ namespace UnitTests\Http\Controllers;
 use TestCase;
 
 /**
- * Class CompaniesControllerTest
+ * Class CompanyControllerTest
  *
  * @package UnitTests\Http\Controllers
  */
-class CompaniesControllerTest extends TestCase
+class StockControllerTest extends TestCase
 {
     public function testReturns200()
     {
-        $this->call('GET', 'companies');
+        $this->call('GET', 'stocks/MSFT');
         $this->assertResponseOk();
     }
 }

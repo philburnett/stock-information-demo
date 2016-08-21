@@ -5,7 +5,7 @@
     <ul>
 <?php foreach ($companies as $company) : ?>
         <li>
-            <a href="<?= route('stock-info', ['stockId' => $company['tickerCode']]) ?>"><?= $company['name'] ?></a>
+            <a href="<?= route('stock-info', ['tickerCode' => $company['tickerCode']]) ?>"><?= $company['name'] ?></a>
         </li>
 <?php endforeach; ?>
     </ul>
