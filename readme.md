@@ -2,14 +2,16 @@
 
 This application provides basic information on a selected stock.
 
-## Official Documentation
+##Install
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+ - git clone https://github.com/philburnett/stock-information-demo.git
+ - cd stock-information-demo
+ - composer install
+ - cd public
+ - php -S localhost:8080
+ 
+You should now be able to visit http://localhost:8080 in a browser to view the site.
 
-## Security Vulnerabilities
+##Tests
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Running phpunit in the root dir (stock-information-demo) of the application will run the test suite.
