@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Domain\NewsStory;
+use App\Domain\SentimentAnalyser;
 use App\Domain\StockInformation;
 use App\Domain\StockTicker;
 use App\Http\Clients\StockClient;
@@ -24,17 +25,26 @@ class StockService
      * @var StockNewsClient
      */
     private $stockStoryClient;
+    /**
+     * @var SentimentAnalyser
+     */
+    private $sentimentAnalyser;
 
     /**
      * StockService constructor.
      *
-     * @param StockClient     $stockClient
-     * @param StockNewsClient $stockStoryClient
+     * @param StockClient       $stockClient
+     * @param StockNewsClient   $stockStoryClient
+     * @param SentimentAnalyser $sentimentAnalyser
      */
-    public function __construct(StockClient $stockClient, StockNewsClient $stockStoryClient)
-    {
-        $this->stockClient      = $stockClient;
-        $this->stockStoryClient = $stockStoryClient;
+    public function __construct(
+        StockClient $stockClient,
+        StockNewsClient $stockStoryClient,
+        SentimentAnalyser $sentimentAnalyser
+    ) {
+        $this->stockClient       = $stockClient;
+        $this->stockStoryClient  = $stockStoryClient;
+        $this->sentimentAnalyser = $sentimentAnalyser;
     }
 
     /**
@@ -54,7 +64,10 @@ class StockService
                 $news            = $this->stockStoryClient->getNews($content['storyFeedUrl']);
                 $content['news'] = array_map(
                     function ($newsStory) {
-                        return NewsStory::fromApiData($newsStory);
+                        return NewsStory::fromApiData(
+                            $newsStory,
+                            $this->sentimentAnalyser->getSentiment($newsStory['body'])
+                        );
                     }, $news
                 );
             } catch (Exception $e) {

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Exceptions\CompanyNotFoundException;
+use Exception;
 use MongoClient;
 
 /**
@@ -12,6 +13,7 @@ use MongoClient;
  */
 class CompanyRepository
 {
+    // @todo: inject this from env
     const CONNECTION_STRING =
         'mongodb://mm_recruitment_user_readonly:rebelMutualWhistle@ds037551.mongolab.com:37551/mm-recruitment';
 
@@ -22,9 +24,15 @@ class CompanyRepository
 
     public function __construct()
     {
-        $connection       = new MongoClient(self::CONNECTION_STRING);
-        $db               = $connection->selectDB('mm-recruitment');
-        $this->collection = $connection->selectCollection($db, 'company');
+        try {
+            $connection       = new MongoClient(self::CONNECTION_STRING);
+            $db               = $connection->selectDB('mm-recruitment');
+            $this->collection = $connection->selectCollection($db, 'company');
+        } catch (Exception $e) {
+            // @todo - Log here
+            throw $e;
+        }
+
     }
 
     /**

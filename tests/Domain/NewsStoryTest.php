@@ -14,7 +14,7 @@ class NewsStoryTest extends TestCase
 {
     public function testConstructor()
     {
-        $story = new NewsStory('foo', 'bar');
+        $story = new NewsStory('foo', 'bar', 0);
         $this->assertEquals('foo', $story->getHeadline());
         $this->assertEquals('bar', $story->getBody());
     }
@@ -24,7 +24,7 @@ class NewsStoryTest extends TestCase
      */
     public function testThrowsExceptionWithInvalidHeadline()
     {
-        new NewsStory('', 'bar');
+        new NewsStory('', 'bar', 0);
     }
 
     /**
@@ -32,6 +32,14 @@ class NewsStoryTest extends TestCase
      */
     public function testThrowsExceptionWithInvalidBody()
     {
-        new NewsStory('foo', '');
+        new NewsStory('foo', '', 0);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testThrowsExceptionWithInvalidSentiment()
+    {
+        new NewsStory('foo', 'bar', 'A');
     }
 }

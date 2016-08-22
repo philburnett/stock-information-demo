@@ -11,6 +11,9 @@ use TestCase;
  */
 class CompanyControllerTest extends TestCase
 {
+    /**
+     * Full end to end integration test
+     */
     public function testReturns200()
     {
         $this->call('GET', 'companies');
