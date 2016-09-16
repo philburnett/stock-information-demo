@@ -16,7 +16,7 @@ class StockClientTest extends TestCase
 {
     public function testGetInfoReturnsArray()
     {
-        $mockClient = Mockery::mock('GuzzleHttp\Client');
+        $mockClient   = Mockery::mock('GuzzleHttp\Client');
         $mockResponse = Mockery::mock('Psr\Http\Message\ResponseInterface');
         $mockContents = Mockery::mock('Psr\Http\Message\StreamInterface');
         $mockResponse->shouldReceive('getBody')->once()->andReturn($mockContents);
@@ -24,7 +24,7 @@ class StockClientTest extends TestCase
         $mockContents->shouldReceive('getContents')->once()->andReturn('{"foo":"bar"}');
 
         $stockClient = new StockClient($mockClient);
-        $result = $stockClient->get(new StockTicker('Test', 'test'));
+        $result      = $stockClient->get(new StockTicker('Test', 'test'));
 
         $this->assertArrayHasKey('foo', $result);
         $this->assertEquals('bar', $result['foo']);
@@ -35,7 +35,7 @@ class StockClientTest extends TestCase
      */
     public function testThrowsExceptionWithInvalidStatusCode()
     {
-        $mockClient = Mockery::mock('GuzzleHttp\Client');
+        $mockClient   = Mockery::mock('GuzzleHttp\Client');
         $mockResponse = Mockery::mock('Psr\Http\Message\ResponseInterface');
 
         $mockClient->shouldReceive('get')->once()->andThrow(new \Exception());

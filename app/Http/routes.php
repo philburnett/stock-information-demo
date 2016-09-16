@@ -17,10 +17,10 @@ $app->get('/', function () use ($app) {
 
 $app->get(
     '/companies',
-    ['as' => 'companies', 'uses' => 'CompanyController@getList']
+    ['as' => 'companies', 'uses' => 'CompanyController@getList', 'middleware' => 'auth']
 );
 
 $app->get(
     '/stocks/{tickerCode}',
-    ['as' => 'stock-info', 'uses' => 'StockController@getInfo']
+    ['as' => 'stock-info', 'uses' => 'StockController@getInfo', 'middleware' => 'auth']
 );
