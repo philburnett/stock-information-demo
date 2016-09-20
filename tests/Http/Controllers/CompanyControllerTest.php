@@ -2,6 +2,8 @@
 
 namespace UnitTests\Http\Controllers;
 
+use App\Exceptions\InvalidTokenException;
+use Mockery;
 use TestCase;
 
 /**
@@ -16,7 +18,23 @@ class CompanyControllerTest extends TestCase
      */
     public function testReturns200()
     {
-        $this->call('GET', 'companies');
+        $mockAuthService = Mockery::mock('App\Services\AuthService');
+        $mockAuthService->shouldReceive('isAuthorised')->andReturn(true);
+
+        $this->app->instance('App\Services\AuthService', $mockAuthService);
+
+        $this->call('GET', 'companies', [], ['MERGERMARKET' => 'foobar']);
         $this->assertResponseOk();
+    }
+
+    public function testReturns500()
+    {
+        $mockAuthService = Mockery::mock('App\Services\AuthServiceInterface');
+        $mockAuthService->shouldReceive('getUser')->andThrow(new InvalidTokenException());
+
+        $this->app->instance('App\Services\AuthServiceInterface', $mockAuthService);
+
+        $this->call('GET', 'companies', ['noauth' => 1], ['MERGERMARKET' => 'foobar']);
+        $this->assertResponseStatus(401);
     }
 }

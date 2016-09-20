@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\CompanyNotFoundException;
 use App\Exceptions\StockInformationNotAvailableException;
+use App\Http\Clients\Auth;
+use App\Services\AuthService;
 use App\Services\CompanyService;
 use App\Services\StockService;
 use Exception;
@@ -23,6 +25,10 @@ class StockController extends Controller
      * @var CompanyService
      */
     private $companyService;
+    /**
+     * @var Auth
+     */
+    private $auth;
 
     /**
      * @param StockService   $stockService
